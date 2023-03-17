@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>shop</title>
+</head>
+<style>
+	body{
+		font-family: "Rubik", sans-serif;
+		font-size: 1.25rem;
+		
+		
+		align-items: center;
+		
+		margin:50px;
+		min-height: 100vh;
+		background: #fff;
+		font-size:15px;
+		font-family: monospace;
+		background-image: url("https://kartinkin.net/pics/uploads/posts/2022-08/1659769494_9-kartinkin-net-p-fon-kosmicheskii-detskii-krasivo-9.jpg");
+	}
+	.mybtn{
+    	text-align: center; 
+    	padding: 8px 10px; 
+    	border: solid 1px #777777; 
+    	color: #7777777; 
+    	background:#ffffff;
+    	tansition: all .3s linear;
+    	-webkit-transition: all .3s linear;
+    	-moz-transition: all .3s linear; 	
+    	text-transform: uppercase;
+    }
+    .mybtn:hover {
+    	color: #fff;
+    	background-color: #8E8EF0;
+    	tansition: all .3s linear;
+    	-webkit-transition: all .3s linear;
+    	-moz-transition: all .3s linear; 
+    }
+	
+</style>
+
+	<script>
+		let goods = {
+			"2" : {
+				"name" : "iPhone X",
+				"cost" : 899,
+				"img" : "https://i.dummyjson.com/data/products/2/1.jpg"
+			},
+			"1" : {
+				"name" : "iPhone 9",
+				"cost" : 549,
+				"img" : "https://i.dummyjson.com/data/products/1/1.jpg"
+			}
+		};
+		
+		let out = '';
+		for (let key in goods){
+			out += "<img src ='" + goods[key].img + "'width='200' height='200'>";
+			out += "<br>";
+			out += "Название: "+goods[key].name + "<br>";
+			out += "Цена: "+goods[key].cost + "<br>";
+			out += "<br>";
+		}
+		document.write(out)	
+		
+		let bag={
+			"2" : {
+				"имя" : "iPhone X",
+				"стоимость" : 899,
+				"количество" : 1
+			},
+			"1" : {
+				"имя" : "iPhone 9",
+				"стоимость" : 549,
+				"количество" : 1
+			},
+		}
+		document.onclick = event => {
+			if (event.target.classList.contains('plus')){
+				plusFunction(event.target.dataset.id);
+				addFunction(event.target.dataset.id);
+			}
+			if (event.target.classList.contains('minus')){
+				minusFunction(event.target.dataset.id);
+				delFunction(event.target.dataset.id);
+			}
+		}
+			
+		const plusFunction = id =>{
+			bag[id]["количество"]++;
+			renderCart();
+			
+		}
+		
+		const minusFunction = id =>{
+			if (bag[id]["количество"] - 1 == 0){
+				deleteFunction(id);
+				return true;
+			}
+			bag[id]["количество"]--;
+			renderCart();
+			
+			
+		}
+		
+		const deleteFunction = id => {
+			delete bag[id];
+			renderCart();
+			
+		}
+		
+		const renderCart = () =>{
+			console.log(bag);
+		}
+		
+		const addFunction = id =>{
+			bag[id]["стоимость"] *= 2;
+			renderCart();
+		}
+		
+		const delFunction = id =>{
+			if (bag[id]["стоимость"] - ["стоимость"] == 0){
+				deleteFunction(id);
+				return true;
+			}
+			bag[id]["стоимость"] /= 2 ;
+			renderCart();
+		}
+		
+		renderCart();
+	
+	fetch('https://dummyjson.com/products/1')
+	.then(res => res.json())
+	.then(console.log);
+
+	fetch('https://dummyjson.com/products/2')
+	.then(res => res.json())
+	.then(console.log);
+	
+	</script>
+
+<body>
+	
+	<p><form action="корзина.html" method="POST"><button class="mybtn">В корзину</button></form></p>
+	
+</body>
+	
+</html>
